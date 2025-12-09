@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Pronto | Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              border: "hsl(var(--border))",
+              input: "hsl(var(--input))",
+              ring: "hsl(var(--ring))",
+              background: "hsl(var(--background))",
+              foreground: "hsl(var(--foreground))",
+              primary: {
+                DEFAULT: "hsl(var(--primary))",
+                foreground: "hsl(var(--primary-foreground))",
+              },
+              secondary: {
+                DEFAULT: "hsl(var(--secondary))",
+                foreground: "hsl(var(--secondary-foreground))",
+              },
+              destructive: {
+                DEFAULT: "hsl(var(--destructive))",
+                foreground: "hsl(var(--destructive-foreground))",
+              },
+              muted: {
+                DEFAULT: "hsl(var(--muted))",
+                foreground: "hsl(var(--muted-foreground))",
+              },
+              accent: {
+                DEFAULT: "hsl(var(--accent))",
+                foreground: "hsl(var(--accent-foreground))",
+              },
+              card: {
+                DEFAULT: "hsl(var(--card))",
+                foreground: "hsl(var(--card-foreground))",
+              },
+              popover: {
+                DEFAULT: "hsl(var(--popover))",
+                foreground: "hsl(var(--popover-foreground))",
+              },
+            },
+            borderRadius: {
+              lg: "var(--radius)",
+              md: "calc(var(--radius) - 2px)",
+              sm: "calc(var(--radius) - 4px)",
+            },
+            animation: {
+              "shiny-text": "shiny-text 8s infinite",
+              "shimmer-slide": "shimmer-slide var(--speed) ease-in-out infinite alternate",
+              "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
+            },
+            keyframes: {
+              "shiny-text": {
+                "0%, 90%, 100%": {
+                  "background-position": "calc(-100% - var(--shiny-width)) 0",
+                },
+                "30%, 60%": {
+                  "background-position": "calc(100% + var(--shiny-width)) 0",
+                },
+              },
+              "shimmer-slide": {
+                to: {
+                  transform: "translate(calc(100cqw - 100%), 0)",
+                },
+              },
+              "spin-around": {
+                "0%": {
+                  transform: "translateZ(0) rotate(0)",
+                },
+                "15%, 35%": {
+                  transform: "translateZ(0) rotate(90deg)",
+                },
+                "65%, 85%": {
+                  transform: "translateZ(0) rotate(270deg)",
+                },
+                "100%": {
+                  transform: "translateZ(0) rotate(360deg)",
+                },
+              },
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+      
+      :root {
+        --radius: 0.75rem; /* 12px */
+        --font-sans: 'Inter', sans-serif;
+      }
+  
+      .dark {
+        /* Black background #000000 */
+        --background: 0 0% 0%;
+        /* White text #FFFFFF */
+        --foreground: 0 0% 100%;
+        
+        /* Card #1C1C1C */
+        --card: 0 0% 11%;
+        --card-foreground: 0 0% 100%;
+        
+        --popover: 0 0% 11%;
+        --popover-foreground: 0 0% 100%;
+        
+        /* Buttons/Primary #222222 */
+        --primary: 0 0% 13%;
+        --primary-foreground: 0 0% 100%;
+        
+        /* Secondary #1C1C1C or slightly lighter for contrast if needed, keep similar to card */
+        --secondary: 0 0% 11%;
+        --secondary-foreground: 0 0% 100%;
+        
+        /* Muted #AAAAAA is text, so muted background should be subtle */
+        --muted: 0 0% 15%;
+        --muted-foreground: 0 0% 67%; /* #AAAAAA */
+        
+        --accent: 0 0% 15%;
+        --accent-foreground: 0 0% 100%;
+        
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 100%;
+        
+        /* Border #333333 */
+        --border: 0 0% 20%;
+        /* Input border */
+        --input: 0 0% 20%;
+        --ring: 0 0% 83.9%;
+      }
+
+      /* Light mode overrides - keeping default light mode or adjusting slightly for consistency? 
+         Keeping existing light mode values for now as request focused on Dark Premium. 
+      */
+      html:not(.dark) {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 5.9% 10%;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.1/",
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.10.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.1",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
+    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^3.4.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.0.0",
+    "@radix-ui/react-tooltip": "https://esm.sh/@radix-ui/react-tooltip@1.0.7?external=react,react-dom",
+    "@radix-ui/react-slot": "https://esm.sh/@radix-ui/react-slot@1.0.2?external=react,react-dom",
+    "class-variance-authority": "https://esm.sh/class-variance-authority@0.7.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
